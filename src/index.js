@@ -217,8 +217,8 @@ export default class extends Component {
 
     const initState = {
       autoplayEnd: false,
-      loopJump: false,
-      offset: {}
+      // loopJump: false,
+      // offset: {}
     }
 
     initState.total = props.children ? props.children.length || 1 : 0
@@ -251,9 +251,9 @@ export default class extends Component {
       initState.height = height;
     }
 
-    initState.offset[initState.dir] = initState.dir === 'y'
-      ? height * props.index
-      : width * props.index
+    // initState.offset[initState.dir] = initState.dir === 'y'
+    //   ? height * props.index
+    //   : width * props.index
 
 
     this.internals = {
@@ -543,10 +543,11 @@ export default class extends Component {
       marginTop: 3,
       marginBottom: 3
     }, this.props.dotStyle ]} />
+    const specialDot = this.props.specialDot
     for (let i = 0; i < this.state.total; i++) {
       dots.push(i === this.state.index
         ? React.cloneElement(ActiveDot, {key: i})
-        : React.cloneElement(Dot, {key: i})
+        : ((this.props.specialDotKeys && this.props.specialDotKeys.indexOf(i) > -1 ) ? React.cloneElement(specialDot, {key: i}) : React.cloneElement(Dot, {key: i}))
       )
     }
 
